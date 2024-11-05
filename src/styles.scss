@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+.container{
+  padding: 2vw 4vw;
+}
+
+.span-bold{
+  font-weight: bold;
+}
+
+.card-footer{
+  display: flex;
+  justify-content: end;
+}
+
+.btn-primary {
+  align-self: end;
+}
