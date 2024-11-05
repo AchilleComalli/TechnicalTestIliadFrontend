@@ -1,0 +1,35 @@
+<div class="container">
+  <div [style.maxWidth.px]="600" class="card" *ngIf="order">
+    <h3 class="card-header">Dettaglio Ordine</h3>
+    <div class="card-block">
+      <h4 class="card-title">{{ order.name }}</h4>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <span class="span-bold">Descrizione:</span> {{ order.description }}
+      </li>
+      <li class="list-group-item">
+        <span class="span-bold">Data:</span> {{ order.date | date: 'dd/MM/yyyy HH:mm' }}
+      </li>
+      <li class="list-group-item">
+        <div class="card-block">
+          <h4 class="card-title">Prodotti</h4>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let product of order.products">
+              <div class="product-container">
+                <span><span class="span-bold">Id Prodotto:</span> {{ product.id }}</span>
+                <span><span class="span-bold">Nome:</span> {{ product.name }}</span>
+                <span><span class="span-bold">Prezzo:</span> {{ product.price }} €</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div class="card-footer">
+      <button class="btn btn-sm btn-primary">
+        Modifica
+      </button>
+    </div>
+  </div>
+</div>
