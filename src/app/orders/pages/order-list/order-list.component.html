@@ -1,8 +1,37 @@
+<clr-alert *ngIf="showAlert" [clrAlertType]="'success'" [clrAlertClosable]="true">
+  <clr-alert-item>
+    <span class="alert-text">Ordine eliminato con successo!</span>
+  </clr-alert-item>
+</clr-alert>
+
 <div class="container">
   <div class="orders-page-header">
-    <h1 class="title">Gestione ordini</h1>
+    <h1 class="title" cds-text="display">Gestione Ordini</h1>
+    <div class="clr-form clr-form-horizontal">
+      <form clrForm clrLayout="horizontal" [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+
+        <clr-input-container>
+          <label>Search</label>
+          <input clrInput id="search" formControlName="search" placeholder="Ricerca" />
+        </clr-input-container>
+
+        <clr-date-container>
+          <label>Start Date</label>
+          <input clrDate id="fromDate" formControlName="fromDate" />
+        </clr-date-container>
+
+        <clr-date-container>
+          <label>End Date</label>
+          <input clrDate id="toDate" formControlName="toDate" />
+        </clr-date-container>
+
+        <button type="submit" class="btn btn-primary">Filtra</button>
+      </form>
+    </div>
+
     <button class="btn btn-primary">Aggiungi ordine</button>
   </div>
+
 
   <clr-datagrid (clrDgRefresh)="refresh($event)">
     <clr-dg-column>Id Ordine</clr-dg-column>
@@ -12,8 +41,9 @@
     <clr-dg-placeholder>Nessun ordine trovato!</clr-dg-placeholder>
     <clr-dg-row *clrDgItems="let order of orders">
       <clr-dg-action-overflow>
-        <button class="action-item" (click)="onEdit(order)">Edit</button>
-        <button class="action-item" (click)="onDelete(order)">Delete</button>
+        <button class="action-item" [routerLink]="['/orders', order.id]">Visualizza</button>
+        <button class="action-item" (click)="onEdit(order)">Modifica</button>
+        <button class="action-item" (click)="openDeleteModal(order)">Elimina</button>
       </clr-dg-action-overflow>
 
       <clr-dg-cell>{{ order.id }}</clr-dg-cell>
@@ -31,4 +61,13 @@
     </clr-dg-footer>
   </clr-datagrid>
 </div>
+
+<clr-modal [(clrModalOpen)]="deleteModalOpen" [clrModalClosable]="false">
+  <h3 class="modal-title">Sei sicuro di voler eliminare l'ordine?</h3>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="closeDeleteModal()">Annulla</button>
+    <button type="button" class="btn btn-primary" (click)="onDelete()">Elimina</button>
+  </div>
+</clr-modal>
+
 

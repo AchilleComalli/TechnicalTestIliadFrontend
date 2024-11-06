@@ -41,4 +41,8 @@ export class OrderService {
     params += params == '' ? "pagination=1" : "&pagination=1";
     return this.http.get<Response<PaginatedResponse<Order>>>(this.apiUrl + '/Search?' + params);
   }
+
+  deleteOrderById(id: number): Observable<Response<PaginatedResponse<any>>> {
+    return this.http.delete<Response<any>>(this.apiUrl + '/' + id);
+  }
 }
