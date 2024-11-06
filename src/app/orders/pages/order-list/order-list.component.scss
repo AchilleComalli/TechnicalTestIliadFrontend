@@ -9,4 +9,35 @@
   margin: 0;
 }
 
+form {
+  gap: 1.5vw;
+  padding: 0;
+}
 
+.clr-row {
+  gap: 1.5vw;
+  align-items: end;
+}
+
+.orders-actions-bar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 20px 20px 10px 20px;
+}
+
+@media (max-width: 1200px) {
+  form {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .orders-actions-bar {
+    display: flex;
+  }
+
+  .add-button{
+    width: 100%;
+    margin: 0px;
+  }
+}

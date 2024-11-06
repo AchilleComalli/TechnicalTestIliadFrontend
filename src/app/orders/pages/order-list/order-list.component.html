@@ -7,29 +7,28 @@
 <div class="container">
   <div class="orders-page-header">
     <h1 class="title" cds-text="display">Gestione Ordini</h1>
-    <div class="clr-form clr-form-horizontal">
-      <form clrForm clrLayout="horizontal" [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+    <div class="orders-actions-bar">
+      <form clrForm clrLayout="vertical" [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+        <div class="clr-row">
+          <clr-input-container>
+            <label>Search</label>
+            <input clrInput id="search" formControlName="search" placeholder="Ricerca"/>
+          </clr-input-container>
 
-        <clr-input-container>
-          <label>Search</label>
-          <input clrInput id="search" formControlName="search" placeholder="Ricerca" />
-        </clr-input-container>
+          <clr-date-container>
+            <label>Start Date</label>
+            <input clrDate id="fromDate" formControlName="fromDate"/>
+          </clr-date-container>
 
-        <clr-date-container>
-          <label>Start Date</label>
-          <input clrDate id="fromDate" formControlName="fromDate" />
-        </clr-date-container>
-
-        <clr-date-container>
-          <label>End Date</label>
-          <input clrDate id="toDate" formControlName="toDate" />
-        </clr-date-container>
-
-        <button type="submit" class="btn btn-primary">Filtra</button>
+          <clr-date-container>
+            <label>End Date</label>
+            <input clrDate id="toDate" formControlName="toDate"/>
+          </clr-date-container>
+        <button type="submit" class="btn btn-default">Filtra</button>
+        </div>
       </form>
+      <button class="btn btn-primary  add-button" [routerLink]="['/orders/add']">Aggiungi ordine</button>
     </div>
-
-    <button class="btn btn-primary">Aggiungi ordine</button>
   </div>
 
 

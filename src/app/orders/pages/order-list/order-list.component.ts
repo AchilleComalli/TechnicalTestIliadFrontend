@@ -33,7 +33,7 @@ export class OrderListComponent implements OnInit {
   getItems(filters: any) {
     this.orderService.searchOrders(filters).subscribe(
       (result) => {
-        this.orders = result.data.data;
+        this.orders = result.data;
       },
       (error) => {
         console.error(error);
