@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="title" cds-text="display">Creazione Ordine</h1>
+  <div class="clr-form clr-form-horizontal">
+    <form clrForm clrLayout="horizontal" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="clr-row">
+        <clr-input-container>
+          <label class="clr-required-mark">Nome</label>
+          <input clrInput id="name" formControlName="name" placeholder="Nome" minlength="3" required/>
+        </clr-input-container>
+
+        <clr-input-container>
+          <label class="clr-required-mark">Descrizione</label>
+          <input clrInput id="description" formControlName="description" required/>
+        </clr-input-container>
+
+        <clr-date-container>
+          <label class="clr-required-mark">Data</label>
+          <input clrDate id="date" formControlName="date" required/>
+        </clr-date-container>
+
+        <clr-input-container>
+          <label class="clr-required-mark">Prodotti</label>
+          <input clrInput id="products" formControlName="products" required/>
+        </clr-input-container>
+
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary">Crea</button>
+      </div>
+    </form>
+  </div>
+</div>
