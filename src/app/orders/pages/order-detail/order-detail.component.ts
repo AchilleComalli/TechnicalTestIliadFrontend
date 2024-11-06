@@ -23,7 +23,7 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getOrderById( this.params.id).subscribe(
       (result) => {
-        this.order = result.data;
+        this.order = result;
       },
       (error) => {
         console.error(error);

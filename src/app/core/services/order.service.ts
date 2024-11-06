@@ -36,13 +36,21 @@ export class OrderService {
     return this.http.get<Response<Order>>(this.apiUrl + '/' + id);
   }
 
-  searchOrders(filters: any): Observable<Response<PaginatedResponse<Order>>> {
+  searchOrders(filters: any): Observable<PaginatedResponse<Order>> {
     let params = new URLSearchParams(filters).toString() ?? '';
     params += params == '' ? "pagination=1" : "&pagination=1";
-    return this.http.get<Response<PaginatedResponse<Order>>>(this.apiUrl + '/Search?' + params);
+    return this.http.get<PaginatedResponse<Order>>(this.apiUrl + '/Search?' + params);
   }
 
   deleteOrderById(id: number): Observable<Response<PaginatedResponse<any>>> {
     return this.http.delete<Response<any>>(this.apiUrl + '/' + id);
+  }
+
+  createOrder(data: any) {
+    return this.http.post<Response<any>>(this.apiUrl, data);
+  }
+
+  updateOrderById(id: number, data: any) {
+    return this.http.put<Response<any>>(this.apiUrl + '/' + id, data);
   }
 }
