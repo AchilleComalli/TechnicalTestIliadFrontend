@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ClrDatagridStateInterface} from "@clr/angular";
 import {OrderService} from "../../../core/services/order.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -14,6 +13,14 @@ export class OrderListComponent implements OnInit {
   orderToDelete: any;
   showAlert: boolean = false;
   searchForm: FormGroup;
+  filterModel: any = {
+    perPage: 10,
+  };
+  pagination: any = {
+    page: 1,
+    perPage: 10,
+    total: 0
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -27,13 +34,16 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getItems({});
   }
 
-  getItems(filters: any) {
-    this.orderService.searchOrders(filters).subscribe(
+  getItems() {
+    this.orderService.searchOrders(this.filterModel).subscribe(
       (result) => {
         this.orders = result.data;
+        this.pagination = {
+          ...this.pagination,
+          total: result.pagination.total
+        };
       },
       (error) => {
         console.error(error);
@@ -41,23 +51,28 @@ export class OrderListComponent implements OnInit {
     );
   }
 
-  refresh(state: ClrDatagridStateInterface): void {
-    console.log("refresh");
+  refresh(event: any): void {
+    console.log(event);
+    this.filterModel = {...this.filterModel, page: event.page.current, perPage: event.page.size};
+    this.getItems();
   }
 
   onSubmitSearch() {
     const {search, fromDate, toDate} = this.searchForm.value;
-    let filters: any = {};
+    this.filterModel = {
+      page: 1,
+      perPage: this.filterModel.perPage,
+    };
     if (search) {
-      filters.search = search;
+      this.filterModel.search = search;
     }
     if (fromDate) {
-      filters.fromDate = fromDate;
+      this.filterModel.fromDate = fromDate;
     }
     if (toDate) {
-      filters.toDate = toDate;
+      this.filterModel.toDate = toDate;
     }
-    this.getItems(filters);
+    this.getItems();
   }
 
   onDelete() {
@@ -66,6 +81,7 @@ export class OrderListComponent implements OnInit {
         this.showAlert = true;
         this.deleteModalOpen = false;
         this.orderToDelete = null;
+        this.getItems();
       },
       (error) => {
         console.error(error);
@@ -76,7 +92,6 @@ export class OrderListComponent implements OnInit {
   openDeleteModal(order: any) {
     this.deleteModalOpen = true;
     this.orderToDelete = order;
-    console.log(this.deleteModalOpen, this.orderToDelete);
   }
 
   closeDeleteModal() {

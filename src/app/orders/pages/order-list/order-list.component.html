@@ -38,7 +38,7 @@
     <clr-dg-column>Descrizione</clr-dg-column>
     <clr-dg-column>Data</clr-dg-column>
     <clr-dg-placeholder>Nessun ordine trovato!</clr-dg-placeholder>
-    <clr-dg-row *clrDgItems="let order of orders">
+    <clr-dg-row *ngFor="let order of orders">
       <clr-dg-action-overflow>
         <button class="action-item" [routerLink]="['/orders', order.id]">Visualizza</button>
         <button class="action-item" [routerLink]="['/orders/edit/', order.id]">Modifica</button>
@@ -52,10 +52,9 @@
     </clr-dg-row>
 
     <clr-dg-footer>
-      <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="100">
-        <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Users per page</clr-dg-page-size>
-        {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
-        {{ pagination.totalItems }} users
+      <clr-dg-pagination [clrDgPageSize]="pagination.perPage" [(clrDgPage)]="pagination.page" [clrDgTotalItems]="pagination.total">
+        <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Ordini per pagina</clr-dg-page-size>
+        {{ pagination.total }} ordini totali
       </clr-dg-pagination>
     </clr-dg-footer>
   </clr-datagrid>
