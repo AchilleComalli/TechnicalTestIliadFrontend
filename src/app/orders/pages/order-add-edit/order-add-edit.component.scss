@@ -1,10 +1,31 @@
-.title{
+.title {
   margin-bottom: 25px;
 }
 
-.form-footer{
+.form-footer {
   width: 100%;
   padding-top: 10px;
   display: flex;
   justify-content: end;
+}
+
+.clr-row {
+  gap: 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2vw 5vw;
+}
+
+.clr-input, .clr-select, .clr-textarea{
+  width: 35vw;
+  display: inline-block;
+}
+
+@media (max-width: 1200px) {
+  .clr-row {
+    justify-content: center;
+  }
+  .form-footer {
+    justify-content: center;
+  }
 }

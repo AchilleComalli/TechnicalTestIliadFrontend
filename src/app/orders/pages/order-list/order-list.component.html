@@ -41,7 +41,7 @@
     <clr-dg-row *clrDgItems="let order of orders">
       <clr-dg-action-overflow>
         <button class="action-item" [routerLink]="['/orders', order.id]">Visualizza</button>
-        <button class="action-item" (click)="onEdit(order)">Modifica</button>
+        <button class="action-item" [routerLink]="['/orders/edit/', order.id]">Modifica</button>
         <button class="action-item" (click)="openDeleteModal(order)">Elimina</button>
       </clr-dg-action-overflow>
 

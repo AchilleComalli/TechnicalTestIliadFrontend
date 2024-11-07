@@ -45,10 +45,6 @@ export class OrderListComponent implements OnInit {
     console.log("refresh");
   }
 
-  onEdit(order: any) {
-    console.log("onEdit");
-  }
-
   onSubmitSearch() {
     const {search, fromDate, toDate} = this.searchForm.value;
     let filters: any = {};

@@ -1,31 +1,51 @@
 <div class="container">
-  <h1 class="title" cds-text="display">Creazione Ordine</h1>
-  <div class="clr-form clr-form-horizontal">
-    <form clrForm clrLayout="horizontal" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="title" cds-text="display">{{ isEdit ? 'Modifica' : 'Creazione' }} Ordine</h1>
+  <div class="clr-form clr-form-vertical" *ngIf="!loading">
+    <form clrForm clrLayout="vertical" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="clr-row">
         <clr-input-container>
-          <label class="clr-required-mark">Nome</label>
+          <label class="clr-control-label clr-required-mark">Nome</label>
           <input clrInput id="name" formControlName="name" placeholder="Nome" minlength="3" required/>
+          <clr-control-error *ngIf="form.controls['name'].hasError('required')">
+            Il nome è obbligatorio.
+          </clr-control-error>
         </clr-input-container>
 
-        <clr-input-container>
-          <label class="clr-required-mark">Descrizione</label>
-          <input clrInput id="description" formControlName="description" required/>
-        </clr-input-container>
+        <clr-textarea-container>
+          <label class="clr-control-label clr-required-mark">Descrizione</label>
+          <textarea clrTextarea id="description" formControlName="description" placeholder="Descrizione"
+                    required></textarea>
+          <clr-control-error *ngIf="form.controls['description'].hasError('required')">
+            La descrizione è obbligatoria.
+          </clr-control-error>
+        </clr-textarea-container>
 
         <clr-date-container>
-          <label class="clr-required-mark">Data</label>
+          <label class="clr-control-label clr-required-mark">Data</label>
           <input clrDate id="date" formControlName="date" required/>
+          <clr-control-error *ngIf="form.controls['date'].hasError('required')">
+            La data è obbligatoria.
+          </clr-control-error>
         </clr-date-container>
 
-        <clr-input-container>
-          <label class="clr-required-mark">Prodotti</label>
-          <input clrInput id="products" formControlName="products" required/>
-        </clr-input-container>
+        <clr-combobox-container>
+          <label class="clr-control-label clr-required-mark">Prodotti</label>
+          <clr-combobox id="products" name="products" formControlName="products" required clrMulti="true">
+            <ng-container *clrOptionSelected="let selected">
+              {{ selected.name }}
+            </ng-container>
+            <clr-options>
+              <clr-option *ngFor="let product of productsList" [clrValue]="product">{{ product.name }}</clr-option>
+            </clr-options>
+          </clr-combobox>
+          <clr-control-error *ngIf="form.controls['products'].hasError('required')">
+            Scegliere almeno un prodotto.
+          </clr-control-error>
+        </clr-combobox-container>
 
       </div>
       <div class="form-footer">
-        <button type="submit" class="btn btn-primary">Crea</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">{{ isEdit ? 'Modifica' : 'Crea' }}</button>
       </div>
     </form>
   </div>
