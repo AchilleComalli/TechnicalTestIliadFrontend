@@ -9,7 +9,6 @@ interface PaginatedResponse<T> {
   pagination: any;
 }
 
-
 @Injectable({
   providedIn: 'root',
 })

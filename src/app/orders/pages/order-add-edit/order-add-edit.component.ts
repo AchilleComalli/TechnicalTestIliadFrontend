@@ -41,11 +41,8 @@ export class OrderAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.productService.getAll().subscribe(
-      (result) => {
+      (result: Product[]) => {
         this.productsList = result;
-      },
-      (error) => {
-        console.error(error);
       }
     );
     if (this.params.id) {
@@ -55,9 +52,6 @@ export class OrderAddEditComponent implements OnInit {
           result.date = moment(result.date).format('MM/DD/YYYY');
           this.form.patchValue(result);
           this.loading = false;
-        },
-        (error) => {
-          console.error(error);
         }
       );
     } else {
@@ -79,9 +73,6 @@ export class OrderAddEditComponent implements OnInit {
         this.orderService.createOrder(body).subscribe(
           (result) => {
             this.router.navigate(['/orders/' + result.id])
-          },
-          (error) => {
-            console.error(error);
           }
         );
       } else {
@@ -92,16 +83,11 @@ export class OrderAddEditComponent implements OnInit {
         this.orderService.updateOrderById(this.params.id, body).subscribe(
           (result) => {
             this.router.navigate(['/orders/' + result.id])
-          },
-          (error) => {
-            console.error(error);
           }
         );
       }
-
     } else {
       this.form.markAllAsTouched();
     }
   }
-
 }
