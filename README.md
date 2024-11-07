@@ -1,27 +1,37 @@
-# TechnicalTestIliadFrontend
+# Progetto Angular - Setup e Avvio in Locale
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+Questo repository contiene un'applicazione Angular già configurata. Segui le istruzioni sottostanti per eseguire il progetto in locale.
 
-## Development server
+## Prerequisiti
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Prima di eseguire il progetto, assicurati di avere installato sul tuo sistema i seguenti strumenti:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/) (versione minima 14.x.x)
+- [npm](https://www.npmjs.com/) (Node Package Manager) – dovrebbe essere installato automaticamente con Node.js.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Puoi verificare se hai già installato Node.js e npm eseguendo questi comandi nel terminale:
 
-## Build
+```bash
+node -v
+npm -v
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installazione delle Dipendenze
+Una volta dentro la cartella del progetto, esegui il comando per installare tutte le dipendenze necessarie:
 
-## Running unit tests
+```bash
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Questo comando scaricherà e installerà tutte le librerie e i pacchetti necessari, definiti nel file package.json.
 
-## Running end-to-end tests
+## Avvio dell'Applicazione in Locale
+Per avviare l'applicazione Angular in modalità di sviluppo, esegui il comando:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve
+```
+Il comando eseguirà il server di sviluppo e l'app sarà disponibile all'indirizzo:
+http://localhost:4200
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Puoi aprire il browser e accedere a questo URL per visualizzare l'app in esecuzione.
